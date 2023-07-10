@@ -616,7 +616,7 @@ Berikut merupakan gambar hasil evaluasi model LSTM tanpa data augmentasi:
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=1.3]{gambar/CMLSTMnoAug2.png}
   % Keterangan gambar yang diinputkan
-  \caption{Akurasi dan Loss LSTM Tanpa Data Augmentasi}
+  \caption{Confusion Matrix LSTM Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:CMLSTMnoaug2}
 \end{figure}
@@ -667,7 +667,7 @@ Berikut merupakan gambar hasil evaluasi model SVM tanpa data augmentasi:
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=5]{gambar/CMSVMnoAug2.png}
   % Keterangan gambar yang diinputkan
-  \caption{Akurasi dan Loss SVM Tanpa Data Augmentasi}
+  \caption{Confusion Matrix SVM Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:CMSVMnoaug2}
 \end{figure}
@@ -771,11 +771,11 @@ selain itu pada grafik juga terlihat model mengalami overfitting dengan akurasi 
 
 Model yang kelima yaitu SVM dengan input (x) berupa nilai EAR serta MAR dan kelas
 sebagai target (y) mendapatkan hasil evaluasi yang lebih baik jika dibandingkan dengan IndRNN dan LSTM tanpa data
-augmentasi yang menghasilkan 10 nilai benar.
+augmentasi yang menghasilkan 9 nilai benar.
 
-Model yang keenam yaitu SVM dengan input (x) berupa nilai EAR serta MAR yang teraugmentasi dan kelas
-sebagai target (y) mendapatkan hasil evaluasi yang lebih baik daripada SVM dengan data yang tidak teraugmentasi.
+Model yang keenam yaitu SVM dengan input (x) berupa nilai EAR serta MAR yang teraugmentasi dan kelas sebagai target 
+(y) mendapatkan hasil evaluasi yang lebih baik dari SVM dengan data yang tidak teraugmentasi dengan jumlah 10 nilai benar. 
 
 Berdasarkan keseluruhan hasil training dan evaluasi, didapatkan bahwa model klasifikasi terbaik yaitu model IndRNN yang
-ditraining menggunakan data yang telah diaugmentasi. Hal ini memvalidasi bahwa kinerja IndRNN pada klasifikasi kantuk
+ditraining menggunakan data yang telah diaugmentasi. Hal ini memvalidasi bahwa model IndRNN pada klasifikasi kantuk
 lebih baik daripada menggunakan SVM dan LSTM.
