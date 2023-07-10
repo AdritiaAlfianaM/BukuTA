@@ -1,0 +1,235 @@
+\begin{center}
+    \Large
+    \textbf{LAMPIRAN}
+\end{center}
+
+
+\addcontentsline{toc}{chapter}{LAMPIRAN}
+
+\vspace{2ex}
+
+\textbf{Lampiran A : Lampiran Program Preprocessing Data}
+
+A.1 Fungsi Menghitung Nilai EAR
+\begin{lstlisting}[language=Python]
+    def calculate_EAR(eye):
+    A = dist.euclidean(eye[1], eye[5])
+    B = dist.euclidean(eye[2], eye[4])
+    C = dist.euclidean(eye[0], eye[3])
+
+    eye_aspect_ratio = (A + B) / (2.0 * C)
+
+    return eye_aspect_ratio
+\end{lstlisting}
+
+A.2 Fungsi Menghitung Nilai MAR
+\begin{lstlisting}[language=Python]
+    V = dist.euclidean(mouth[1], mouth[7])
+    W = dist.euclidean(mouth[2], mouth[6])
+    X = dist.euclidean(mouth[3], mouth[5])
+    Y = (V+W+X)/ 3.0
+
+    Z =dist.euclidean(mouth[0], mouth[4])
+
+    mouth_aspect_ratio = Y / Z
+
+    if mouth_aspect_ratio < 0.001:
+        mouth_aspect_ratio = 0.001
+    return mouth_aspect_ratio
+\end{lstlisting}
+
+A.3 Program Interpolasi Data
+\begin{lstlisting}[language=Python]
+    for i in range (len(filenames)): #terahir index 
+    data = pd.read_csv((inputNaN + filenames[i]), index_col=0, sep=',') 
+    print(filenames[i])
+    print(data.isnull().sum())
+    for col in data.columns:
+      # menghitung ear
+      if col == 'ear_x' :
+        left_ear = calc_ear(data[data.columns[1]], data[data.columns[2]], data[data.columns[3]], data[data.columns[4]],
+                          data[data.columns[5]], data[data.columns[6]], data[data.columns[7]], data[data.columns[8]],
+                          data[data.columns[9]], data[data.columns[10]], data[data.columns[11]], data[data.columns[12]])
+        right_ear = calc_ear(data[data.columns[13]], data[data.columns[14]], data[data.columns[15]], data[data.columns[16]],
+                          data[data.columns[17]], data[data.columns[18]], data[data.columns[19]], data[data.columns[20]],
+                          data[data.columns[21]], data[data.columns[22]], data[data.columns[23]], data[data.columns[24]])
+        value = pd.Series((left_ear+right_ear)/2)
+      # menghitung mar
+      elif col == 'mar_x':
+        mar = calc_mar(data[data.columns[26]], data[data.columns[27]], data[data.columns[28]], data[data.columns[29]],
+                          data[data.columns[30]], data[data.columns[31]], data[data.columns[32]], data[data.columns[33]],
+                          data[data.columns[34]], data[data.columns[35]], data[data.columns[36]], data[data.columns[37]],
+                          data[data.columns[38]], data[data.columns[39]], data[data.columns[40]], data[data.columns[41]])
+        value = pd.Series(mar)
+      else:
+        value = data[col].interpolate() 
+        value = round(value,0)
+      data[col].fillna(value=value, inplace=True)
+    filenames[i] = filenames[i].split(".")[0]
+    data.to_csv('/mydrive/Output/' + filenames[i] + '.csv')
+\end{lstlisting}
+
+A.4 Fungsi Pemotongan Data
+\begin{lstlisting}[language=Python]
+    def begin_dat(data_num, data):
+        slice_dat = data.iloc[:data_num]
+        return slice_dat
+  
+    def last_dat(data_num, data):
+        slice_dat = data.iloc[-data_num: ]
+        return slice_dat
+  
+    def mid_dat(data_num, data):
+        len_dat = len(data.iloc[:,0])
+        mid = (len_dat - data_num) / 2
+        slice_dat = data[ceil(mid):-floor(mid)]
+        data.reset_index()
+  
+        return slice_dat
+\end{lstlisting}
+
+A.5 Program Labeling Data
+\begin{lstlisting}[language=Python]
+    for i in range (len(filenames)):
+    data = pd.read_csv((output + filenames[i]), index_col=0, sep=',')
+    data.reset_index(drop = True, inplace = True)
+    df = data[['ear_x', 'mar_x']]
+    slice_dat = mid_dat(16200, df)
+    slice_dat.reset_index(drop = True, inplace = True)
+    nama_file = filenames[i]
+    label = label_name(nama_file)
+    slice_dat['label'] = label
+    print(slice_dat)
+    filenames[i] = filenames[i].split(".")[0]
+    slice_dat.to_csv('/mydrive/MarEar/' + filenames[i] + '.csv', index=False)
+\end{lstlisting}
+
+\newpage
+A.6 Program Normalisasi Data
+\begin{lstlisting}[language=Python]
+    from sklearn.preprocessing import StandardScaler
+
+    scaler = StandardScaler()
+    arr = scaler.fit_transform(data[['ear_x', 'mar_x']])
+    scaled_data = pd.DataFrame(arr, columns=['ear_x', 'mar_x'])
+    scaled_data
+\end{lstlisting}
+
+A.7 Program Pembagian Data Training dan Data Validasi
+\begin{lstlisting}[language=Python]
+    def train_test_split(label, ratio):
+    split_point = int(len(data[data.label == label])*ratio)
+    return(data[data.label==label].iloc[:split_point,:], data[data.label==label].iloc[split_point:, :])
+
+    split_ratio = (101/126)
+    train_data = pd.DataFrame([])
+    test_data = pd.DataFrame([])
+    total_label = 3
+    for i in range(total_label):
+    (train, test) = train_test_split(i+1, split_ratio)
+    train_data = pd.concat([train_data, train])
+    test_data = pd.concat([test_data, test])
+\end{lstlisting}
+
+A.8 Program Sliding Window
+\begin{lstlisting}[language=Python]
+    WINDOW_LEN = 16200
+    #step lebih kecil harus overlap dengan window_len
+    STEP = 16199
+    N_FEATURE = 2
+    
+    def generate_sequence(x, y, window_len, step):
+      segments = []
+      labels = []
+      for i in range(0, len(x)-window_len, step):
+        ear = x['ear_x'].values[i:i+window_len]
+        mar = x['mar_x'].values[i:i+window_len]
+        label = stats.mode(y['label'][i:i+window_len])[0][0]
+        segments.append([ear, mar])
+        labels.append(label)
+    
+      return segments, labels
+\end{lstlisting}
+
+\textbf{Lampiran B : Lampiran Program Training Data}
+B.1 Fungsi Callback
+\begin{lstlisting}[language=Python]
+    # buat callbacks
+    my_callbacks = [
+        tf.keras.callbacks.ReduceLROnPlateau(factor=0.5, patience=5,),
+        tf.keras.callbacks.ModelCheckpoint(filepath='/mydrive/TA/IndRNNaug_best.h5', save_best_only=True)]
+\end{lstlisting}
+
+B.2 Program Model IndRNN
+\begin{lstlisting}[language=Python]
+    def create_model():
+    rnn2= Sequential()
+    rnn2.add(Bidirectional(IndRNN(126, return_sequences=True, dropout=0.0, recurrent_dropout=0.0, kernel_initializer='orthogonal', kernel_regularizer=l2(L2), recurrent_regularizer=l2(L2),
+            bias_regularizer=l2(L2),name="LSTM_1"), input_shape=(WINDOW_LEN, N_FEATURE)))
+    rnn2.add(Dropout(0.3))
+    rnn2.add(Flatten(name='Flatten'))
+    rnn2.add(Dense(64, activation ='relu', name='Dense_3'))
+    rnn2.add(Dropout(0.2))
+    rnn2.add(Dense(32, activation ='relu', name='Dense_4'))
+    rnn2.add(Dropout(0.1))
+    rnn2.add(Dense(3, activation='softmax', kernel_regularizer=l2(L2), bias_regularizer=l2(L2)))
+    rnn2.compile(optimizer=optimizers.Adam(0.000025), metrics=['accuracy'], loss='categorical_crossentropy')
+    return rnn2
+  
+  model = create_model()
+\end{lstlisting}
+
+B.3 Program Model LSTM
+\begin{lstlisting}[language=Python]
+    lstm = Sequential()
+    lstm.add(Bidirectional(LSTM(126, return_sequences=True,kernel_initializer='orthogonal', kernel_regularizer=l2(L2), recurrent_regularizer=l2(L2),
+             bias_regularizer=l2(L2),name="LSTM_1"), input_shape=(WINDOW_LEN, N_FEATURE)))
+    lstm.add(Dropout(0.3))
+    lstm.add(Flatten(name='Flatten'))
+    lstm.add(Dense(64, activation ='relu', name='Dense_3'))
+    lstm.add(Dropout(0.2))
+    lstm.add(Dense(32, activation ='relu', name='Dense_4'))
+    lstm.add(Dropout(0.2))
+    lstm.add(Dense(3, activation='softmax', kernel_regularizer=l2(L2), bias_regularizer=l2(L2)))
+    lstm.compile(optimizer=optimizers.Adam(0.000025), metrics=['accuracy'], loss='categorical_crossentropy')
+\end{lstlisting}
+
+B.4 Program Model SVM
+\begin{lstlisting}[language=Python]
+    svm_model = svm.SVC(kernel='rbf')
+
+    svm_model.fit(d2_train_dataset_x, ytrain)
+\end{lstlisting}
+
+\textbf{Lampiran C : Lampiran Program Evaluasi dan Testing Data}
+\begin{lstlisting}[language=Python]
+    import seaborn as sns
+    from sklearn import metrics
+
+    # Recreate the exact same model, including its weights and the optimizer
+    new_model = tf.keras.models.load_model('/mydrive/TA/IndRNNaug_best.h5', custom_objects={'IndRNN':IndRNN})
+
+    # Show the model architecture
+    new_model.summary()
+
+    y_pred_ohe = new_model.predict(x_test) #menghasilkan 3 kelas
+    y_pred_ohe 
+
+    y_pred_labels = np.argmax(y_pred_ohe, axis=1)
+    y_pred_labels
+
+    y_true_labels = np.argmax(y_test, axis=1)
+
+    confusion_matrix = metrics.confusion_matrix(y_true= y_true_labels, y_pred= y_pred_labels)
+
+    plt.figure(figsize=(8,6))
+    sns.set(style='whitegrid')
+    sns.heatmap(confusion_matrix, xticklabels=['1', '2', '3'], yticklabels=['1', '2', '3'], annot=True, fmt='d')
+    plt.title("confusion Matrix")
+    plt.ylabel("True Label")
+    plt.xlabel("predicted Label")
+    plt.show()
+
+    from sklearn.metrics import classification_report
+    print(classification_report(y_true_labels, y_pred_labels))
+\end{lstlisting}

@@ -1,0 +1,47 @@
+\begin{center}
+  \large\textbf{ABSTRAK}
+\end{center}
+
+\addcontentsline{toc}{chapter}{ABSTRAK}
+
+\vspace{2ex}
+
+\begingroup
+% Menghilangkan padding
+\setlength{\tabcolsep}{0pt}
+
+\noindent
+\begin{tabularx}{\textwidth}{l >{\centering}m{2em} X}
+  Nama Mahasiswa    & : & \name{}         \\
+
+  Judul Tugas Akhir & : & \tatitle{}      \\
+
+  Pembimbing        & : & 1. \advisor{}   \\
+                    &   & 2. \coadvisor{} \\
+\end{tabularx}
+\endgroup
+
+% Ubah paragraf berikut dengan abstrak dari tugas akhir
+Pengemudi merupkan faktor utama terjadinya kecelakaan yang ada di jalanan. Hal tersebut
+dilatarbelakangi oleh berbagai faktor salah satunya adalah rasa kantuk.  Gejala dari
+rasa kantuk umumnya adalah microsleeps (berkedip dengan durasi lebih dari 500 ms) dan
+menguap. Salah satu cara untuk mendeteksi kantuk yaitu dengan metode non-intrusif
+menggunakan visi komputer dengan menerapkan algoritma \emph{Deep Learning}. \emph{Recurrent Neural Network} merupakan
+salah satu jenis \emph{Deep Learning} yang melibatkan masukan berurutan karena memiliki memori
+untuk menyimpan \emph{state}. IndRNN merupakan pengembangan dari RNN namun pemrosesan setiap
+neuron pada suatu layer tidak bergantung dengan layer lain. Melalui penelitian ini
+model klasifikasi kantuk akan dibuat dengan menggunakan parameter kedipan mata dan
+pola bukaan mulut dengan menggunakan IndRNN. Penelitian ini mengambil data berupa
+video dari database UTA-RLDD. Data tersebut kemudian diproses sehingga
+didapatkan nilai \emph{Eye Aspect Ratio} (EAR) dan \emph{Mouth Aspect Ratio} (MAR) pada
+setiap frame. EAR dan MAR tersebut nantinya akan digunakan sebagai masukan model
+klasifikasi pada IndRNN yang menghasilkan output berupa 3 kelas yang mengacu pada skala
+kantuk Karolinska. Kelas tersebut diantaranya : Kelas pertama (Waspada) yaitu
+terdiri dari label kelas KSS 1 sampai 5, Kelas kedua (Waspada Rendah) yaitu terdiri dari
+label kelas KSS 6 dan 7, Kelas ketiga (Mengantuk) yaitu terdiri dari label kelas
+KSS 8 dan 9. Berdasarkan penelitian yang telah dilakukan, model klasifikasi kantuk yang 
+paling efektif adalah model IndRNN dengan data teraugmentasi. Model tersebut memiliki 
+nilai akurasi sebesar 0,6943 dan niali validasi sebesar 0,52.
+
+% Ubah kata-kata berikut dengan kata kunci dari tugas akhir
+Kata Kunci: IndRNN, Kantuk, Visi Komputer.

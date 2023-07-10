@@ -1,0 +1,121 @@
+\chapter{PENDAHULUAN}
+\label{chap:pendahuluan}
+
+% Ubah bagian-bagian berikut dengan isi dari pendahuluan
+
+\section{Latar Belakang}
+\label{sec:latarbelakang}
+
+Seorang pengemudi harus bisa bertanggung jawab terhadap
+keselamatan pribadinya, penumpang ataupun barang yang dibawa.
+Oleh karena itu, pengemudi perlu fokus hingga sampai ke tempat
+tujuan dikarenakan mengemudi ialah kegiatan yang monoton, dengan
+tugas yang berulang-ulang dan memerlukan perhatian berkelanjutan
+\parencite{1}. Mengantuk, didefinisikan sebagai keadaan kantuk
+ketika seseorang perlu istirahat. Mengantuk dapat menyebabkan gejala yang
+berdampak besar terhadap kinerja tugas seperti: waktu respons
+yang melambat, kurangnya kesadaran intermiten, atau \emph{microsleeps}
+(berkedip dengan durasi lebih dari 500 ms) \parencite{2}. Ciri
+lain dari orang yang mengantuk adalah sering menguap pada jangka
+waktu tertentu \parencite{3}. Saat mengemudi, gejala-gejala ini
+sangat berbahaya karena secara signifikan meningkatkan kemungkinan
+terlewatnya rambu-rambu jalan atau pintu keluar, hanyut ke jalur
+lain atau bahkan kecelakaan \parencite{4}.
+
+Mendeteksi kantuk merupakan salah satu cara untuk menghindari
+dampak negatif dari rasa kantuk itu sendiri. Beberapa cara dapat
+digunakan untuk mendeteksi rasa kantuk contohnya dengan metode
+intrusif dimana pendeteksian rasa kantuk dilakukan dengan memanfaatkan
+bantuan alat EKG (\emph{Electrocardiogram}) dan EEG (\emph{Electroencephalogram}).
+Selain itu ada juga metode non-intrusif yaitu dengan melakukan ekstraksi pada
+fitur wajah dengan menggunakan algoritma tertentu.
+
+Algoritma \emph{Deep Learning} dicirikan oleh penggunaan jaringan saraf
+yang dibangun dari jumlah lapisan yang besar \parencite{5}, jaringan
+saraf tersebut memiliki kemampuan untuk mengotomatisasi proses ekstraksi
+fitur \parencite{6}. Dalam deep learning, algoritmanya dapat mempelajari
+representasi data yang lebih abstrak dan kompleks secara bertahap melalui
+lapisan-lapisan yang ada dalam dalam jaringan saraf. Setiap lapisan dalam
+jaringan saraf tiruan ini bertanggung jawab untuk memproses informasi secara
+bertingkat, menggabungkan dan mentransformasikan data pada setiap langkahnya.
+
+\emph{Recurrent neural networks} (RNN) merupakan salah satu jenis
+dari algoritma \emph{Deep Learning} yang banyak digunakan untuk tugas
+dengan input berurutan, seperti ucapan dan bahasa. Kinerja RNN lebih baik
+untuk data input berurutan karena mempunyai memori yang bisa
+dipergunakan untuk menyimpan state \parencite{18}. Pada tahun 2018,
+Shuali Li et al. mengatakan \emph{Independently Recurrent Neural Network}
+(IndRNN) yakni variasi \emph{deep learning} RNN. Bersumberkan pada
+penelitian Shuali Li et al. (2018), IndRNN ini 10 kali lebih cepat
+serta sedikit lebih akurat dari implementasi \emph{deep learning Long Short-Term Memory}
+(LSTM) yang selalu dipergunakan \parencite{8}.
+
+Melalui pengaplikasian IndRNN pada model klasifikasi kantuk diharapkan
+adanya akurasi yang bisa terdeteksi menjadi lebih baik dari penelitian
+yang sudah diselenggarakan sebelumnya. Dengan akurasi pendeteksian
+kantuk yang baik maka berbagai masalah yang timbul dari rasa kantuk
+saat berkendara tersebut dapat dihindari, namun tidak hanya model
+yang baik, diperlukan juga sebuah sistem untuk menentukan tingkat
+kantuk seseorang sehingga nantinya akan dapat digunakan sebagai bahan
+penelitian yang berkaitan.
+
+\section{Rumusan Masalah}
+\label{sec:permasalahan}
+
+Bersumberkan latar belakang pada sub-bab 1.1, penggunaan EKG dan
+EEG dirasa tidak tepat untuk penggunaan sehari-hari karena memerlukan
+bantuan ahli untuk menggunakan alat-alat tersebut dengan tepat.
+Pengendara akan merasa kesulitan saat harus menggunakan alat-alat
+penunjang sebelum mengemudikan kendaraannya. Oleh karena itu
+diperlukan metode non intrusif, dimana sistem akan mendeteksi
+rasa kantuk dengan mengimplementasikan \emph{deep learning} untuk
+mengklasifikasikan tingkat kantuk pengemudi.
+
+\section{Tujuan}
+\label{sec:Tujuan}
+
+Tujuan dari penelitian ini adalah membangun sistem klasifikasi
+kantuk menggunakan algoritma IdnRNN dengan parameter pola kedipan
+mata serta pola bukaan mulut yang dapat mengklasifikasikan kantuk
+menjadi 3 kelas berbeda yaitu waspada, kewaspadaan rendah, mengantuk.
+
+\section{Batasan Masalah}
+\label{sec:batasanmasalah}
+
+Batasan-batasan dari proyek penelitian ini adalah:
+
+\begin{enumerate}[nolistsep]
+
+      \item Data yang digunakan pada penelitian ini adalah video
+            dari \emph{The University of Texas at Arlington Real-Life Drowsiness Dataset (UTA-RLDD)}.
+
+      \item Model akan mendeteksi kantuk berdasarkan pola kedipan
+            mata serta pola bukaan mulut.
+
+      \item Model hanya akan memproses video masukan dengan durasi
+            tercepat 9 menit dan dengan jumlah \emph{frame per second}
+            sebesar 30.
+
+      \item Model akan mengklasifikasikan video dalam 3 kelas kantuk
+            yaitu kelas 1 (Waspada), kelas 2 (Kewaspadaan Rendah),
+            dan kelas 3 (Mengantuk).
+
+\end{enumerate}
+
+\section{Manfaat}
+
+% Ubah paragraf berikut sesuai dengan tujuan penelitian dari tugas akhir
+Manfaat dari penelitian ini diantaranya :
+\subsection{Bagi Penulis}
+Sebagai sarana implementasi ilmu yang telah didapatkan pada masa
+perkuliahan khususnya mengenai \emph{computer vision} dan \emph{deep learning}, melatih penulis untuk bisa
+berpikir secara logis, sistematis, dan kritis dalam pemecahan masalah sehingga dapat
+memecahkan permasalahan di kehidupan nyata seperti klasifikasi kantuk pada pengemudi.
+\subsection{Bagi Institusi}
+Sebagai pedoman serta inspirasi bagi penelitian lain yang
+berfokus pada pemecahan masalah klasifikasi kantuk menggunakan \emph{deep learning} khususnya dengan
+metode IndRNN.
+\subsection{Bagi Masyarakat}
+Harapannya solusi yang dibuat pada penelitian ini bisa dilaksanakan serta digunakan
+menjadi produk nyata yang manfaatnya bisa dirasakan langsung oleh masyarakat sehingga dapat
+mengurangi dampak negatif dari rasa kantuk itu sendiri.

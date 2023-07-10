@@ -1,0 +1,44 @@
+\begin{center}
+  \large\textbf{ABSTRACT}
+\end{center}
+
+\addcontentsline{toc}{chapter}{ABSTRACT}
+
+\vspace{2ex}
+
+\begingroup
+% Menghilangkan padding
+\setlength{\tabcolsep}{0pt}
+
+\noindent
+\begin{tabularx}{\textwidth}{l >{\centering}m{3em} X}
+  \emph{Name}     & : & \name{}         \\
+
+  \emph{Title}    & : & \engtatitle{}   \\
+
+  \emph{Advisors} & : & 1. \advisor{}   \\
+                  &   & 2. \coadvisor{} \\
+\end{tabularx}
+\endgroup
+
+% Ubah paragraf berikut dengan abstrak dari tugas akhir dalam Bahasa Inggris
+\emph{The driver is the main factor in the occurrence of accidents on the road. This is motivated by
+various factors one of which is drowsiness. Common symptoms of drowsiness are microsleeps
+(blinks longer than 500 ms) and yawning. One way to detect drowsiness is by using a non-intrusive
+method using computer vision by applying the Deep Learning algorithm. RNN is a type of Deep
+Learning that involves sequential input because it has memory to store state. IndRNN is a 
+development of RNN but the processing of each neuron in a layer is independent of other layers.
+Through this research a drowsiness classification model will be created using the parameters
+of eye blink and mouth opening pattern using IndRNN. This study retrieved data in the form of
+videos from the DROZY and UTA-RLDD databases. The data is then processed to obtain the Eye
+Aspect Ratio (EAR) and Mouth Aspect Ratio (MAR) values for each frame. The EAR and MAR will
+later be used as input for the classification model in IndRNN which produces output in the
+form of 3 classes that refer to the Karolinska sleepiness scale. These classes include: First
+class (Alert) which consists of class labels KSS 1 to 5, Second class (Low Vigilant) which
+consists of class labels KSS 6 and 7, Third class (Drowsy) which consists of class labels
+KSS 8 and 9. Based on the conducted research, the most effective drowsiness classification model 
+is the IndRNN model with augmented data. It achieved an accuracy score of 0.6943 and a validation 
+score of 0.52.}
+
+% Ubah kata-kata berikut dengan kata kunci dari tugas akhir dalam Bahasa Inggris
+\emph{Keywords}: \emph{Computer Vision, Drowsiness, IndRNN}.
