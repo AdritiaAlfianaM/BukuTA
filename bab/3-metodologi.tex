@@ -11,7 +11,7 @@ dengan \emph{output} 3 kelas berbeda.
 \section{Metode yang digunakan}
 
 % Contoh input gambar dengan format *.jpg
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
       % Nama dari file gambar yang diinputkan
       \includegraphics[scale=0.75]{gambar/metodologi.png}
       % Keterangan gambar yang diinputkan
@@ -36,7 +36,7 @@ data yang dipilih adalah:
 
 \subsection{Ekstraksi Fitur}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
       % Nama dari file gambar yang diinputkan
       \includegraphics[scale=0.65]{gambar/ekstraksi.png}
       % Keterangan gambar yang diinputkan
@@ -68,7 +68,7 @@ data dan pemberian label, melakukan standarisasi data, serta melakukan kostumisa
 Tahapan-tahapat tersebut dapat digambarkan menjadi gambar \ref{fig:preprocessing}:
 
 % \newpage
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
       % Nama dari file gambar yang diinputkan
       \includegraphics[scale=0.8]{gambar/preprocessing.png}
       % Keterangan gambar yang diinputkan
@@ -77,6 +77,7 @@ Tahapan-tahapat tersebut dapat digambarkan menjadi gambar \ref{fig:preprocessing
       \label{fig:preprocessing}
 \end{figure}
 
+\newpage
 \begin{enumerate}[nolistsep]
       \item Interpolasi Linear
 
@@ -99,7 +100,7 @@ Tahapan-tahapat tersebut dapat digambarkan menjadi gambar \ref{fig:preprocessing
             menggunakan hasil interpolasi koordinat titik-titik yang ada pada mata dan mulut dengan memasukkannya
             pada rumus \ref{eq:EAR} dan rumus \ref{eq:MAR}.
 
-      \item Penyetaraan Jumlah Data dan Labeling
+      \item \emph{Data Balancing} dan \emph{Labeling}
 
             Jumlah frame yang ada pada tiap video tidaklah sama oleh karena itu diperlukan pemotongan jumlah frame pada tiap video
             sehingga jumlah framenya dapat seragam yaitu 16200 frame tiap video. Ketika jumlah frame tiap video sudah seragam maka
@@ -117,7 +118,7 @@ Tahapan-tahapat tersebut dapat digambarkan menjadi gambar \ref{fig:preprocessing
 
       \item Sliding Window
 
-            \begin{figure} [H] \centering
+            \begin{figure} [ht] \centering
                   % Nama dari file gambar yang diinputkan
                   \includegraphics[scale=0.15]{gambar/PotongData.png}
                   % Keterangan gambar yang diinputkan
@@ -126,11 +127,14 @@ Tahapan-tahapat tersebut dapat digambarkan menjadi gambar \ref{fig:preprocessing
                   \label{fig:potong}
             \end{figure}
             Sebelum data dimasukkan ke sliding window, data terlebih dahulu dipisahkan menjadi data training dan data validasi atau
-            testing. Dilakukan augmentasi pada data training dengan melakukan pemotongan data pada titik acu yang berbeda seperti gambar \ref{fig:potong}.
-            Pemotongan dilakukan dari awal data, pemotongan yang dilakukan dari tengah data, dan pemotongan yang dilakukan
-            dari akhir data. Sliding window digunakan sebagai teknik pemrosesan data untuk mempersiapkan data masukan yang lebih
-            sesuai dengan kebutuhan model.  Metode sliding window digunakan karena inputan feature bersifat kontinu dan dalam satu
+            testing. Sliding window digunakan sebagai teknik pemrosesan data untuk mempersiapkan data masukan yang lebih
+            sesuai dengan kebutuhan model.  Metode sliding window digunakan karena masukan feature bersifat kontinu dan dalam satu
             feature terdapat banyak nilai yang tersimpan di dalam array.
+
+            Dilakukan augmentasi pada data training dengan melakukan pemotongan data pada titik acu yang berbeda. Jumlah data bervariasi
+            dalam tiap video namun data yang diambil sebagai masukan model berjumlah 16200. Oleh karena itu dilakukan pemotongan dengan
+            titik acu yang berbeda untuk menghasilkan data augmentasi. Pemotongan dilakukan dengan variasi dari awal data, dari tengah data, dan dari akhir data  yang dapat diilustrasikan
+            seperti gambar \ref{fig:potong}.
 \end{enumerate}
 
 \subsection{\emph{Training Data}}
@@ -144,19 +148,9 @@ sedikit usaha untuk terjaga), Kelas ketiga (Mengantuk) yaitu terdiri dari label 
 9 (Mengantuk, perlu usaha untuk terjaga dan Sangat mengantuk, perlu usaha lebih untuk tetap
 terjaga). Model klasifikasi dibuat menggunakan IndRNN sebagai klasifikatornya.
 
-Model klasifikasi yang dibuat dengan arsitektur SVM, menggunakan parameter kernel RBF.
-Kernel RBF (Radial Basis Function) atau juga dikenal sebagai Gaussian kernel adalah 
-salah satu jenis kernel yang memetakan data ke dalam ruang fitur yang memiliki dimensi tak 
-terhingga. Kernel RBF memberikan bobot pada setiap titik data berdasarkan jaraknya dari pusat. 
-Semakin dekat titik data dengan pusat, semakin besar bobotnya. Dalam kernel RBF, bobot jarak 
-dihitung dengan menggunakan fungsi Gaussian, yang menurun secara eksponensial dengan 
-jarak. Kernel RBF digunakan untuk memodelkan hubungan non-linear antara fitur-fitur dalam 
-data. Dengan melakukan pemetaan data ke dalam ruang fitur yang memiliki dimensi tak 
-terhingga, kernel RBF memungkinkan SVM untuk menemukan hiperplane non-linear yang 
-dapat memisahkan kelas-kelas data dengan lebih baik.
-
 Berikut adalah gambaran arsitektur IndRNN yang digunakan:
 
+\newpage
 \begin{figure} [H] \centering
       % Nama dari file gambar yang diinputkan
       \includegraphics[scale=0.7]{gambar/arsitekturmodel.png}
@@ -186,9 +180,22 @@ Berikut adalah gambaran arsitektur IndRNN yang digunakan:
 
 \end{enumerate}
 
+Model klasifikasi yang dibuat dengan arsitektur SVM, menggunakan parameter kernel RBF.
+Kernel RBF (\emph{Radial Basis Function}) atau juga dikenal sebagai Gaussian kernel adalah
+salah satu jenis kernel yang memetakan data ke dalam ruang fitur yang memiliki dimensi tak
+terhingga. Kernel RBF memberikan bobot pada setiap titik data berdasarkan jaraknya dari pusat.
+Semakin dekat titik data dengan pusat, semakin besar bobotnya. Dalam kernel RBF, bobot jarak
+dihitung dengan menggunakan fungsi Gaussian, yang menurun secara eksponensial dengan
+jarak. Kernel RBF digunakan untuk memodelkan hubungan non-linear antara fitur-fitur dalam
+data. Dengan melakukan pemetaan data ke dalam ruang fitur yang memiliki dimensi tak
+terhingga, kernel RBF memungkinkan SVM untuk menemukan hiperplane non-linear yang
+dapat memisahkan kelas-kelas data dengan lebih baik.
+
+
+
 Berikut merupakan gambaran arsitektur LSTM yang digunakan sebagai model
 klasifikasi kantuk:
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
       % Nama dari file gambar yang diinputkan
       \includegraphics[scale=0.7]{gambar/arsitekturLSTM.png}
       % Keterangan gambar yang diinputkan
@@ -270,17 +277,22 @@ meliputi beberapa poin berikut:
       \item Pengujian Performa Model SVM dengan Akurasi, Presisi, Recall, dan F1-Score
 \end{enumerate}
 
-\subsection{Testing Model}
-Testing model digunakan untuk mengetahui kinerja model yang telah dibuat. Testing model
+\subsection{Pengujian Model}
+Pengujian model digunakan untuk mengetahui kinerja model yang telah dibuat. Pengujian model
 dilakukan dengan menggunakan video yang ada pada dataset DROZY. Video yang ada pada dataset
 diproses dahulu seperti video yang berasal dari dataset UTA-RLDD sehingga menghasilkan
 data yang sesuai. Video yang memiliki jumlah frame yang kurang dari 16200 tidak digunakan
-untuk melakukan testing model.
+untuk melakukan pengujian model.
 
 \section{Data dan peralatan yang digunakan}
+Model klasifikasi kantuk dibangun menggunakan data dari dataset UTA-RLDD serta untuk
+menguji model klasifikasi digunakan dataset DROZY. Alat yang dibutuhkan untuk membangun
+model ini adalah laptop yang terhubung dengan internet sehingga dapat digunakan untuk mengakses
+GoogleColab dan PyCharm.
+
 \subsection{Dataset UTA-RLDD}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
       % Nama dari file gambar yang diinputkan
       \includegraphics[scale=0.4]{gambar/utarldd.png}
       % Keterangan gambar yang diinputkan
@@ -292,7 +304,7 @@ untuk melakukan testing model.
 UTA-RLDD (\emph{The University of Texas at Arlington Real-Life Drowsiness Dataset}) dibuat untuk tugas deteksi kantuk \emph{multi-stages}.
 Dataset ini terditi dari 60 subjek sehat (51 laki-laki dan 9 perempuan) dengan usia diatas 18 tahun. Panjang durasi jumlah
 video yang ada sekitar 30jam RGB dengan fps hingga 30. Subjek diminta untuk mengambil 3 buah video mereka delam 3 kondisi
-kantuk yang berbeda dengan durasi masing-masing sekitar 10 menit\parencite{14}. Ketiga kelas tersebut dijelaskan kepada para peserta sebagai
+kantuk yang berbeda seperti pada gambar \ref{fig:utarldd} dengan durasi masing-masing sekitar 10 menit\parencite{14}. Ketiga kelas tersebut dijelaskan kepada para peserta sebagai
 berikut:
 
 1) Waspada: Salah satu dari tiga kondisi pertama yang disorot dalam tabel KSS dengan nilai 1 hingga 3 dimana subyek dalam
@@ -305,7 +317,7 @@ hadir tetapi tidak diperlukan upaya untuk tetap waspada. Subjek mungkin dapat me
 
 \subsection{Dataset DROZY}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
       % Nama dari file gambar yang diinputkan
       \includegraphics[scale=0.4]{gambar/DROZY.png}
       % Keterangan gambar yang diinputkan
@@ -314,7 +326,8 @@ hadir tetapi tidak diperlukan upaya untuk tetap waspada. Subjek mungkin dapat me
       \label{fig:DROZY}
 \end{figure}
 
-Database DROZY berisi berbagai tipe data yang berhubungan dengan kantuk (sinyal, gambar, dan sebagainya). Database ini
+Database DROZY berisi berbagai tipe data yang berhubungan dengan kantuk (sinyal, gambar, dan sebagainya). Sampel data yang ada pada
+database DROZY ditunjukkan oleh gambar \ref{fig:DROZY}. Database ini
 bertujuan untuk membantu para peneliti untuk melakukan eksperimen, mengembangkan, serta mengevaluasi sistem pada monitoring
 kantuk. Data yang ada di DROZY diambil dari 14 partisipan (3 pria, 11 wanita) yang melakukan simulasi berkendara selama
 10 menit dalam kondisi kurang tidur yang disebabkan oleh bangun yang berkepanjangan. Untuk setiap subjek, dan untuk setiap

@@ -4,6 +4,15 @@
 % Ubah bagian-bagian berikut dengan isi dari tinjauan pustaka
 
 \section{Hasil penelitian terdahulu}
+
+Berdasarkan tinjauan literatur yang mencakup beberapa penelitian mengenai pengembangan
+sistem deteksi kantuk secara non intrusif menggunakan pengolahan citra atau \emph{machine learning},
+penelitian sebelumnya menjadi relevan dan penting untuk dikaji. Mengacu pada referensi penelitian
+terdahulu akan membantu mencegah plagiarisme atau duplikasi hasil penelitian. Hal ini
+bertujuan untuk memberikan kontribusi bagi penulis dan memastikan bahwa penelitian
+mengenai tema ini dapat terus berkembang. Berikut adalah beberapa ulasan tentang
+penelitian terdahulu yang pernah dilakukan.
+
 \subsection{Pengembangan Sistem Deteksi Kantuk Menggunakan Pengklasifikasi \emph{Random Forest} pada Sinyal Elektrokardiogram}
 Pada penelitian ini Nuryani Nuryani, Khoirun Nisak, Artono Dwijo Sutomo mengembangkan   sistem   deteksi   kantuk
 memakai   sinyal elektrokardiogram  (EKG)  dan \emph{Random  Forest}. Sistem  deteksi kantuk   dilatih   memakai suatu
@@ -19,10 +28,10 @@ supaya dapat mendeteksi kantuk dengan arsitektur 1D CNN \parencite{10}.
 \subsection{Klasifikasi Skala Kantuk Karolinska Berdasarkan Nilai \emph{Eye Aspect Ratio} Menggunakan \emph{Deep Learning}}
 Pada penelitian ini Annida Miftakhul Farodisa melakukan riset tentang deteksi kantuk menggunakan metode non-intrusif
 dengan memanfaatkan kamera (fitur wajah) dan \emph{deep learning}. Penulis membuat model klasifikasi Skala Kantuk Karolinska
-(KSS) berdasarkan nilai \emph{Eye Aspect Ratio}. Penelitian ini menggunakan video \emph{near-infrared} NIR pada dataset DROZY yang berisi video
-subjek saat menjalani pengujian kewaspadaan psikomotorik yang mengisi kuesioner Skala Kantuk Karolinska (KSS) sebelum
+(SKK) berdasarkan nilai \emph{Eye Aspect Ratio}. Penelitian ini menggunakan video \emph{near-infrared} NIR pada dataset DROZY yang berisi video
+subjek saat menjalani pengujian kewaspadaan psikomotorik yang mengisi kuesioner Skala Kantuk Karolinska (SKK) sebelum
 memulai pengujian. Dilakukan ekstraksi nilai EAR untuk setiap subjek pada setiap frame di setiap video sehingga
-membentuk pola EAR dan dilabeli dengan KSS yang dikelompokkan menjadi empat kelas \parencite{11}.
+membentuk pola EAR dan dilabeli dengan SKK yang dikelompokkan menjadi empat kelas \parencite{11}.
 
 \subsection{Deteksi Kantuk Pada Pengendara Roda Empat Melalui Citra Wajah Menggunakan Metode \emph{Facial Landmark}}
 Pada penelitian ini Muhammad Akbar Maulana melakukan riset tentang deteksi kantuk pada pengendara roda empat melalui
@@ -49,32 +58,52 @@ penerapan makeup virtual.
 \emph{facial landmark} diaplikasikan ke \emph{input frames} untuk mendeteksi fitur wajah dengan menggunakan \emph{library} dlib yang
 menggunakan \emph{Histogram Oriented Gradients} (HOG) untuk pendeteksian wajah dan \emph{Linear Support Vector Machine} (SVM)
 sebagai \emph{classifier} dalam prosedur pengenalan landmark wajah \parencite{16}. Terdapat 68 titik yang merepresentasikan wajah,
-titik koordinat tersebut merepresentasikan fitur sesuai dengan gambar \ref{fig:wajah}:
+titik koordinat tersebut merepresentasikan fitur sesuai dengan gambar \ref{fig:wajah} dan dengan keterangan tiap koordinat pada
+tabel \ref{tb:LandmarkWajah}.
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.75]{gambar/wajah.png}
+  \includegraphics[scale=0.5]{gambar/wajah.png}
   % Keterangan gambar yang diinputkan
   \caption{Landmark wajah manusia \parencite{16}}
   % Label referensi dari gambar yang diinputkan
   \label{fig:wajah}
 \end{figure}
 
-1.	Dagu		: 0-16
+\newpage
+\begin{longtable}{|c|c|c|}
+  \caption{Koordinat landmark wajah}
+  \label{tb:LandmarkWajah}                                \\
+  \hline
+  \rowcolor[HTML]{C0C0C0}
+  \textbf{No} & \textbf{Fitur} & \textbf{Koordinat Fitur} \\
+  \hline
 
-2.	Alis kanan	: 17-21
+  % Gunakan \G untuk mengisi sel dan \w untuk mengosongkan sel
+  1           & Dagu           & 0-16                     \\
+  
 
-3.	Alis kiri		: 22-26
+  2           & Alis Kanan     & 17-21                    \\
+  
 
-4.	Hidung		: 27-35
+  3           & Alis Kiri      & 22-26                    \\
+  
 
-5.	Mata kanan	: 36-41
+  4           & Hidung         & 27-35                    \\
+  
 
-6.	Mata kiri	: 42-47
+  5           & Mata Kanan     & 36-41                    \\
+  
 
-7.	Mulut		: 48-60
+  6           & Mata Kiri      & 42-47                    \\
+  
 
-8.	Bibir		: 61-67
+  7           & Mulut          & 48-60                    \\
+  
+
+  8           & Bibir          & 61-67                    \\
+  \hline
+\end{longtable}
 
 \subsection{\emph{Eye Aspect Ratio} (EAR)}
 EAR merupakan salah satu metode yang dapat digunakan untuk bisa menghitung jarak antara kelopak mata atas serta
@@ -82,7 +111,7 @@ kelopak mata bawah bersumberkan titik geometri wajah pada mata. Metode EAR ini s
 pola bukaan mata individual setiap menitnya. Perhitungan EAR ini dihitung bersumberkan pada koordinat mata kiri serta
 kanan yang ada dalam landmark wajah. EAR pada landmark wajah bisa diilustrasikan denggan gambar \ref{fig:mata} :
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=0.35]{gambar/mata.png}
   % Keterangan gambar yang diinputkan
@@ -112,7 +141,7 @@ MAR ialah salah satu metode yang dapat dipergunakan untuk dapat menghitung jarak
 bersumberkan titik geometri wajah pada mulut. Metode MAR ini selalu dipakai guna menghitung bukaan mulut seseorang \parencite{12}.
 MAR pada landmark wajah bisa diilustrasikan dengan gambar \ref{fig:mulut} :
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=0.4]{gambar/mulut.png}
   % Keterangan gambar yang diinputkan
@@ -131,55 +160,54 @@ mengambil titik tepat ditengah bibir atas dan bibir bawah. Rumus tersebut dapat 
   MAR = \frac{\left \| P2-P8 \right \| + \left \| P3-P7 \right \| + \left \| P4-P6 \right \|}{3 \left \| P1-P5 \right \|}
 \end{equation}
 
-\section{Skala Kantuk Karolinska(KSS)}
+\section{Skala Kantuk Karolinska(SKK)}
 Skala Kantuk Karolinska menjadi alat yang paling banyak digunakan untuk perhitungan kewaspadaan dalam investigasi
-kronobiologis dan tidur. KSS ditemukan menjadi pengukur kantuk yang andal dan sensitif (Gillberg et al., 1994), dan
+kronobiologis dan tidur. SKK ditemukan menjadi pengukur kantuk yang andal dan sensitif (Gillberg et al., 1994), dan
 itu divalidasi oleh beberapa pengukuran fisiologis yang berbeda (Kaida et al., 2006; Marzano et al., 2007; Filtness
 et al., 2021). Untuk mendeteksi transisi antara terjaga dan tidur dapat diukur menggunakan indeks fisiologis
-sederhana yang diambil dan ditentukan dari rekaman \emph{electroencephalogram} (EEG). Nilai pada KSS berkisar antara 1
+sederhana yang diambil dan ditentukan dari rekaman \emph{electroencephalogram} (EEG). Nilai pada SKK berkisar antara 1
 (amat sangat terjaga) hingga 9 (sangat mengantuk, berusaha lebih untuk terjaga) \parencite{19}. Hal tersebut dapat
 digambarkan menjadi seperti tabel \ref{tbl:Skala}:
 
-\begin{table}[h!]
-  \centering
-  \caption{Tabel Skala Kantuk Karolinska \parencite{19}}
-  \begin{tabular}{|p{1.5cm} |c|}
+\begin{longtable}{|c|c|}
+  \caption{Skala Kantuk Karolinska \parencite{19}}
+  \label{tb:Skala}                                                \\
+  \hline
+  \rowcolor[HTML]{C0C0C0}
+  \textbf{Skala} & \textbf{Tingkat Kantuk / Keterjagaan}          \\
+  \hline
 
-    \hline
-    Skala & Tingkat Kantuk/Keterjagaan                     \\
-    \hline
+  % Gunakan \G untuk mengisi sel dan \w untuk mengosongkan sel
+  1              & Amat Sangat Terjaga                            \\
+  
 
-    % Gunakan \G untuk mengisi sel dan \w untuk mengosongkan sel
-    1     & Amat Sangat Terjaga                            \\
-    \hline
+  2              & Sangat Terjaga                                 \\
+  
 
-    2     & Sangat Terjaga                                 \\
-    \hline
+  3              & Terjaga                                        \\
+  
 
-    3     & Terjaga                                        \\
-    \hline
+  4              & Sedikit Terjaga                                \\
+  
 
-    4     & Sedikit Terjaga                                \\
-    \hline
+  5              & Tidak Terjaga namun Tidak ada tanda Mengantuk  \\
+  
 
-    5     & Tidak Terjaga namun Tidak ada tanda Mengantuk  \\
-    \hline
+  6              & Sedikit Mengantuk                              \\
+  
 
-    6     & Sedikit Mengantuk                              \\
-    \hline
+  7              & Mengantuk, sedikit usaha untuk Terjaga         \\
+  
 
-    7     & Mengantuk, sedikit usaha untuk Terjaga         \\
-    \hline
+  8              & Mengantuk, perlu usaha untuk Terjaga           \\
+  \hline
 
-    8     & Mengantuk, perlu usaha untuk Terjaga           \\
-    \hline
-
-    9     & Sangat Mengantuk, berusaha lebih untuk Terjaga \\
-    \hline
-  \end{tabular}
-  \label{tbl:Skala}
-\end{table}
-
+  \rowcolor[HTML]{C0C0C0}
+  \textbf{Skala} & \textbf{Tingkat Kantuk / Keterjagaan}          \\
+  \hline
+  9              & Sangat Mengantuk, berusaha lebih untuk Terjaga \\
+  \hline
+\end{longtable}
 \section{Interpolasi Data}
 
 Interpolasi dilakukan untuk mengisi atau memperkirakan nilai yang hilang atau
@@ -246,7 +274,17 @@ normalisasi umum digunakan adalah sebagai berikut:
         merupakan nilai standar deviasi dari fitur yang ada pada dataset.
 \end{enumerate}
 
-\newpage
+\section{Augmentasi Data}
+Augmentasi data merupakan teknik yang digunakan untuk memperbanyak jumlah data dengan
+cara memodifikasi data yang telah ada sehingga dapat meningkatkan variasi dalam dataset
+pelatihan tanpa harus mengumpulkan lebih banyak data aktual. Jumlah data yang sedikit menjadi alasan dilakukannya
+teknik augmentasi data. Data baru yang diperoleh dari proses augmentasi data dapat digunakan
+sebagai masukan bagi model \emph{machine learning}. Augmentasi data dapat meningkatkan
+performa model dapat dan digunakan untuk mencegah overfitting serta meningkatkan kemampuan
+model untuk menggeneralisasi dengan lebih baik. Teknik umum dalam melakukan augmentasi data
+diantaranya pemutaran dan pemotongan, pergeseran, perubahan skala, pencerahan dan Kontras,
+pembalikan, perubahan warna. \parencite{30}
+
 \section{\emph{Deep Learning}}
 \emph{Deep Learning} memungkinkan model komputasi yang memuat atas sejumlah lapisan pemrosesan guna memahami representasi data
 melalui sejumlah tingkatan abstraksi. Metode-metode ini sudah meningkatkan \emph{state-of-the-art} dalam pengenalan suara,
@@ -258,7 +296,14 @@ sementara \emph{Recurrent Neural Network} menyoroti data berurutan berupa teks s
 
 \section{\emph{Recurrent Neural Network} (RNN)}
 
-\begin{figure} [H] \centering
+Untuk tugas yang melibatkan input berurutan, seperti ucapan dan bahasa, seringkali lebih baik untuk menggunakan RNN.
+RNN mempunyai memori yang bisa dipergunakan untuk menyimpan state, memori ini memungkinkan RNN untuk memiliki pemahaman
+tentang konteks sebelumnya saat memproses langkah berikutnya. RNN memproses urutan input satu elemen pada setiap waktu,
+mempertahankan di unit tersembunyi mereka sebuah \emph{state vektor} yang secara implisit berisi informasi tentang sejarah semua
+elemen masa lalu dari urutannya yang bisa diilustrasikan dengan gambar \ref{fig:rnn}.
+
+\newpage
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=0.55]{gambar/rnn.png}
   % Keterangan gambar yang diinputkan
@@ -267,12 +312,6 @@ sementara \emph{Recurrent Neural Network} menyoroti data berurutan berupa teks s
   \label{fig:rnn}
 \end{figure}
 
-Untuk tugas yang melibatkan input berurutan, seperti ucapan dan bahasa, seringkali lebih baik untuk menggunakan RNN.
-RNN mempunyai memori yang bisa dipergunakan untuk menyimpan state, memori ini memungkinkan RNN untuk memiliki pemahaman
-tentang konteks sebelumnya saat memproses langkah berikutnya. RNN memproses urutan input satu elemen pada setiap waktu,
-mempertahankan di unit tersembunyi mereka sebuah \emph{state vektor} yang secara implisit berisi informasi tentang sejarah semua
-elemen masa lalu dari urutannya yang bisa diilustrasikan dengan gambar \ref{fig:rnn}.
-
 RNN menggunakan bobot yang bersama-sama digunakan di setiap langkah, dengan tujuan menghasilkan pembaruan yang konsisten
 pada setiap langkah. Bobot ini mencerminkan hubungan antara langkah sebelumnya dan langkah berikutnya.Ketika kita
 mempertimbangkan output dari unit tersembunyi di langkah-langkah waktu diskrit yang berbeda seolah-olah mereka adalah output
@@ -280,11 +319,9 @@ dari yang berbeda neuron dalam \emph{deep multilayer network}. Backpropagation d
 kesalahan melalui setiap langkah waktu dan memperbarui bobot-bobot berdasarkan gradien tersebut. Hal ini memungkinkan RNN untuk
 belajar dan menyesuaikan diri dengan pola dalam data urutan.\parencite{18}.
 
-\newpage
-
 \section{\emph{Independent RNN} (IndRNN)}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=0.45]{gambar/indrnn.png}
   % Keterangan gambar yang diinputkan
@@ -305,7 +342,7 @@ dan menghindari \emph{vanishing gradient problem} yang sering terjadi pada RNN t
 
 \section{\emph{Long Short Terms Memory} (LSTM)}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=0.2]{gambar/LSTM.png}
   % Keterangan gambar yang diinputkan
@@ -363,7 +400,12 @@ pada LSTM:
 
 \section{\emph{Support Vector Machine} (SVM)}
 
-\begin{figure} [H] \centering
+SVM (\emph{Support Vector Machine}) adalah sebuah algoritma pembelajaran mesin yang
+digunakan untuk tugas klasifikasi dan regresi. SVM menciptakan sebuah
+hiperplane atau sebuah garis pemisah yang optimal dalam ruang fitur untuk
+memisahkan data menjadi kelas yang berbeda. \parencite{28}
+
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=0.35]{gambar/SVM.png}
   % Keterangan gambar yang diinputkan
@@ -371,11 +413,6 @@ pada LSTM:
   % Label referensi dari gambar yang diinputkan
   \label{fig:SVM}
 \end{figure}
-
-SVM (\emph{Support Vector Machine}) adalah sebuah algoritma pembelajaran mesin yang
-digunakan untuk tugas klasifikasi dan regresi. SVM menciptakan sebuah
-hiperplane atau sebuah garis pemisah yang optimal dalam ruang fitur untuk
-memisahkan data menjadi kelas yang berbeda. \parencite{28}
 
 \begin{enumerate}[nolistsep]
   \item Klasifikasi Linear:

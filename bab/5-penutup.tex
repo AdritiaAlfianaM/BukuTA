@@ -10,29 +10,49 @@ tugas akhir.
 
 Pada Tugas Akhir ini telah dijelaskan pengembangan Sistem Klasifikasi Kantuk Berdasarkan
 Pola Kedipan Mata dan Pola Bukaan Mulut dengan IndRNN. Dari hasil pengujian yang telah
-dilakukan pada bab sebelumnya, dapat ditarik beberapa kesimpulan sebagai berikut:
+dilakukan pada bab sebelumnya model klasifikasi kantuk IndRNN tanpa data training yang diaugmentasi
+menghasilkan akurasi sebesar 0.8378 dan akurasi validasi sebesar 0.2. Sedangkan model klasifikasi
+kantuk IndRNN yang menggunakan data training teraugmentasi menghasilkan akurasi sebesar 0.6943
+dan akurasi validasi sebesar 0.52, lebih baik jika dibandingkan dengan kedua model yang lainnya karena
+cenderung tidak overfitting. Kedua model lain yang dibuat adalah model LSTM tanpa data training 
+yang diaugmentasi menghasilkan akurasi sebesar 0.9732 dan akurasi validasi sebesar 0.32 dan model 
+klasifikasi kantuk LSTM yang menggunakan data training teraugmentasi yang menghasilkan akurasi 
+sebesar 0.9354 dan akurasi validasi sebesar 0.4 serta model SVM tanpa data training yang
+diaugmentasi menghasilkan akurasi sebesar 0.36 pada evaluasi model dan model 
+SVM yang menggunakan data training teraugmentasi menghasilkan akurasi sebesar 
+0.40 pada evaluasi model.
+
+Berdasarkan keseluruhan hasil evaluasi, didapatkan bahwa model klasifikasi
+terbaik yaitu model IndRNN yang ditraining menggunakan data yang telah diaugmentasi
+dengan menghasilkan 15 data benar jika dibandingkan dengan model LSTM dan SVM yang menghasilkan
+10 data benar.
 
 
-\begin{enumerate}[nolistsep]
-      \item Diimplementasikan 3 buah model dengan arsitektur berbeda untuk klasifikasi kantuk yaitu dengan
-            menggunakan IndRNN, LSTM, dan SVM.
+% \begin{enumerate}[nolistsep]
+%       \item IndRNN dapat diimplementasikan untuk membuat model klasifikasi kantuk dengan
+%             model LSTM dan SVM yang digunakan sebagai pembanding kinerja IndRNN.
 
-      \item Model klasifikasi kantuk menggunakan IndRNN tanpa data training yang
-            diaugmentasi menghasilkan akurasi sebesar 0.8378 dan akurasi validasi sebesar 0.2.
-            Sedangkan model klasifikasi kantuk IndRNN yang menggunakan data training teraugmentasi
-            menghasilkan akurasi sebesar 0.6943 dan akurasi validasi sebesar 0.52.
+%       \item Model klasifikasi kantuk menggunakan IndRNN tanpa data training yang
+%             diaugmentasi menghasilkan akurasi sebesar 0.8378 dan akurasi validasi sebesar 0.2.
+%             Sedangkan model klasifikasi kantuk IndRNN yang menggunakan data training teraugmentasi
+%             menghasilkan akurasi sebesar 0.6943 dan akurasi validasi sebesar 0.52.
 
-      \item Model klasifikasi kantuk menggunakan LSTM tanpa data training yang
-      diaugmentasi menghasilkan akurasi sebesar 0.9732 dan akurasi validasi sebesar 0.32.
-      Sedangkan model klasifikasi kantuk LSTM yang menggunakan data training teraugmentasi
-      menghasilkan akurasi sebesar 0.9354 dan akurasi validasi sebesar 0.4.
+%       \item Model klasifikasi kantuk menggunakan LSTM tanpa data training yang
+%             diaugmentasi menghasilkan akurasi sebesar 0.9732 dan akurasi validasi sebesar 0.32.
+%             Sedangkan model klasifikasi kantuk LSTM yang menggunakan data training teraugmentasi
+%             menghasilkan akurasi sebesar 0.9354 dan akurasi validasi sebesar 0.4.
 
-      \item Model klasifikasi kantuk menggunakan SVM tanpa data training yang
-      diaugmentasi menghasilkan akurasi sebesar 0.36 pada evaluasi model.
-      Sedangkan model klasifikasi kantuk IndRNN yang menggunakan data training teraugmentasi
-      menghasilkan akurasi sebesar 0.40 pada evaluasi model.
+%       \item Model klasifikasi kantuk menggunakan SVM tanpa data training yang
+%             diaugmentasi menghasilkan akurasi sebesar 0.36 pada evaluasi model.
+%             Sedangkan model klasifikasi kantuk IndRNN yang menggunakan data training teraugmentasi
+%             menghasilkan akurasi sebesar 0.40 pada evaluasi model.
 
-\end{enumerate}
+%       \item Berdasarkan keseluruhan hasil evaluasi, didapatkan bahwa model klasifikasi
+%             terbaik yaitu model IndRNN yang ditraining menggunakan data yang telah diaugmentasi
+%             dengan menghasilkan 15 data benar jika dibandingkan dengan model LSTM dan SVM yang menghasilkan
+%             10 data benar.
+
+% \end{enumerate}
 
 \section{Saran}
 \label{chap:saran}

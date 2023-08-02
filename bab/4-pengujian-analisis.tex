@@ -51,6 +51,10 @@ setelah melakukan ekstraksi fitur:
   4           & yl0\_x              & \textit{float}     & Titik y pada koordinat 36 Landmark Wajah \\
   5           & xl1\_x              & \textit{float}     & Titik x pada koordinat 37 Landmark Wajah \\
   6           & yl1\_x              & \textit{float}     & Titik y pada koordinat 37 Landmark Wajah \\
+  \hline
+  \rowcolor[HTML]{C0C0C0}
+  \textbf{No} & \textbf{Nama Kolom} & \textbf{Tipe Data} & \textbf{Deskripsi}                       \\
+  \hline
   7           & xl2\_x              & \textit{float}     & Titik x pada koordinat 38 Landmark Wajah \\
   8           & yl2\_x              & \textit{float}     & Titik y pada koordinat 38 Landmark Wajah \\
   9           & xl3\_x              & \textit{float}     & Titik x pada koordinat 39 Landmark Wajah \\
@@ -97,7 +101,7 @@ setelah melakukan ekstraksi fitur:
 Preprocessing data dilakukan untuk menyiapkan data pelatihan model sehingga dapat menghasilkan
 model klasifikasi yang baik. Berikut hasil implementasikan praproses data pada pengembangan penelitian
 diantaranya melakukan ekstraksi fitur, mengatasi data/frame kosong, melakukan penyetaraan jumlah data
-dan labeling, melakukan normalisasi data, serta melakukan penyesuaian bentuk data.
+dan \emph{labeling}, melakukan normalisasi data, serta melakukan penyesuaian bentuk data.
 
 \subsection{Hasil Interpolasi Data}
 Video yang telah terpilih tidak selalu memiliki data yang lengkap pada tiap frame. Terdapat data yang
@@ -142,7 +146,7 @@ interpolasi:
 \end{longtable}
 
 
-\subsection{Hasil Penyetaraan Data dan Labeling}
+\subsection{Hasil \emph{Data Balancing} dan \emph{Labeling}}
 Panjang data yang didapatkan pada setiap video tidaklah sama seperti pada tabel \ref{tb:JumlahData}, oleh karena itu
 perlu dilakukan penyetaraan panjang data pada tiap video sehingga dapat menjadi
 inputan untuk model klasifikasi. Pada tahap ini hanya kolom ear\_x dan mar\_x
@@ -160,6 +164,10 @@ merupakan tabel rincian jumlah data yang didapat yang ada pada setiap video:
   \hline
   1           & 13-1.csv       & 18234         & 43          & 10-2.csv       & 18620         & 85          & 10-3.csv       & 18866         \\
   2           & 35-1.csv       & 18027         & 44          & 13-2.csv       & 20477         & 86          & 13-3.csv       & 18486         \\
+  \hline
+  \rowcolor[HTML]{C0C0C0}
+  \textbf{No} & \textbf{Video} & \textbf{Data} & \textbf{No} & \textbf{Video} & \textbf{Data} & \textbf{No} & \textbf{Video} & \textbf{Data} \\
+  \hline
   3           & 59-1.csv       & 18089         & 45          & 59-2.csv       & 18169         & 87          & 34-3.csv       & 18388         \\
   4           & 7-1.csv        & 18016         & 46          & 19-2.csv       & 18035         & 88          & 35-3.csv       & 18340         \\
   5           & 21-1.csv       & 18151         & 47          & 21-2.csv       & 18031         & 89          & 59-3.csv       & 18095         \\
@@ -252,27 +260,32 @@ menjadi 353 video untuk menghindari overfitting pada model.
 
 Bentuk data masukan yang dimiliki adalah 2 dimensi dimana bentuk data training yaitu (5718600, 2) dan
 bentuk data test/validasi yaitu (405000, 2) sedangkan yang dibutuhkan pada model IndRNN berjumlah 3 dimensi sehingga sliding window
-diperlukan agar bentuk data trainingnya menjadi (353, 16200, 2) dan bentuk data test/validasi (25, 16200, 2). Bentuk data tersebut dapat
+diperlukan agar bentuk data training menjadi (353, 16200, 2) dan bentuk data test/validasi (25, 16200, 2). Bentuk data tersebut dapat
 dijelaskan menjadi angka pertama merupakan jumlah video, 16200 merupakan jumlah langkah waktu / frame dalam satu video, serta 2
 merupakan jumlah fitur yang digunakan yaitu EAR dan MAR.
 
-\section{Hasil Training Data}
+\section{Hasil \emph{Data Training}}
+
+Hasil yang didapatkan setelah melakukan \emph{Data Training} pada model yang dibuat dengan menggunakan
+arsitektur IndRNN, LSTM, dan SVM dapat dijabarkan sebagai berikut.
+
 \subsection{Independent Recurrent Neural Network}
 Berikut merupakan gambar loss dan akurasi dari data training yang tidak teraugmentasi dan
 data validasi yang terbaik:
 
-\begin{figure} [H] \centering
+\newpage
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.6]{gambar/AccIndRNNnoAug.png}
+  \includegraphics[scale=0.55]{gambar/AccIndRNNnoAug.png}
   % Keterangan gambar yang diinputkan
   \caption{Akurasi IndRNN Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:AccIndRNNnoaug}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.6]{gambar/LossIndRNNnoAug.png}
+  \includegraphics[scale=0.55]{gambar/LossIndRNNnoAug.png}
   % Keterangan gambar yang diinputkan
   \caption{Loss IndRNN Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -282,18 +295,18 @@ data validasi yang terbaik:
 \newpage
 Berikut merupakan gambar loss dan akurasi dari data training yang teraugmentasi dan
 data validasi yang terbaik:
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.6]{gambar/AccIndRNNAug.png}
+  \includegraphics[scale=0.55]{gambar/AccIndRNNAug.png}
   % Keterangan gambar yang diinputkan
   \caption{Akurasi dan Loss IndRNN Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:AccIndRNNaug}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.6]{gambar/LossIndRNNAug.png}
+  \includegraphics[scale=0.55]{gambar/LossIndRNNAug.png}
   % Keterangan gambar yang diinputkan
   \caption{Akurasi dan Loss IndRNN Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -306,22 +319,23 @@ dan loss validasi sebesar 1.9798 . Sedangkan data pada gambar \ref{fig:AccIndRNN
 menunjukkan akurasi training sebesar 0.6943 dan akurasi validasi sebesar 0.52 serta
 loss training sebesar 0.7529 dan loss validasi sebesar 1.1258 .
 
+\newpage
 \subsection{Long short term memory network}
 Berikut merupakan gambar loss dan akurasi dari data training yang tidak teraugmentasi dan
 data validasi yang terbaik:
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.6]{gambar/AccLSTMnoAug.png}
+  \includegraphics[scale=0.55]{gambar/AccLSTMnoAug.png}
   % Keterangan gambar yang diinputkan
   \caption{Akurasi dan Loss LSTM Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:AccLSTMnoaug}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.6]{gambar/LossLSTMnoAug.png}
+  \includegraphics[scale=0.55]{gambar/LossLSTMnoAug.png}
   % Keterangan gambar yang diinputkan
   \caption{Akurasi dan Loss LSTM Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -331,18 +345,18 @@ data validasi yang terbaik:
 \newpage
 Berikut merupakan gambar loss dan akurasi dari data training yang teraugmentasi dan
 data validasi yang terbaik:
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.6]{gambar/AccLSTMaug.png}
+  \includegraphics[scale=0.55]{gambar/AccLSTMaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Akurasi dan Loss LSTM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:AccLSTMaug}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.6]{gambar/LossLSTMaug.png}
+  \includegraphics[scale=0.55]{gambar/LossLSTMaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Akurasi dan Loss LSTM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -355,6 +369,7 @@ sebesar 2.4947 . Sedangkan data pada gambar \ref{fig:AccLSTMaug} dan gambar \ref
 menunjukkan akurasi training sebesar 0.9354 dan akurasi validasi sebesar 0.4
 serta loss training sebesar 0.3541 dan loss validasi sebesar 1.7487 .
 
+\newpage
 \section{Hasil Evaluasi Model}
 Hasil evaluasi yang dihasilkan pada penelitian ini berbentuk:
 \begin{enumerate}[nolistsep]
@@ -362,7 +377,7 @@ Hasil evaluasi yang dihasilkan pada penelitian ini berbentuk:
 
         Confusion matrix adalah tabel yang menunjukkan jumlah prediksi yang benar dan salah yang dilakukan oleh
         model. Confusion matrix terdiri dari empat komponen: \emph{true positive} (TP), \emph{true negative} (TN), \emph{false
-        positive} (FP), dan \emph{false negative} (FN). Dengan menggunakan confusion matrix, kita dapat menghitung
+          positive} (FP), dan \emph{false negative} (FN). Dengan menggunakan confusion matrix, kita dapat menghitung
         metrik evaluasi lainnya.
 
   \item Akurasi
@@ -396,18 +411,18 @@ Hasil evaluasi yang dihasilkan pada penelitian ini berbentuk:
 
 Berikut merupakan gambar hasil evaluasi model IndRNN tanpa data augmentasi:
 \newpage
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.8]{gambar/CMIndRNNnoaug.png}
+  \includegraphics[scale=0.7]{gambar/CMIndRNNnoaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Confusion Matrix IndRNN Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:CMIndRNNnoaug}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.95]{gambar/scoreIndRNNnoaug.png}
+  \includegraphics[scale=0.55]{gambar/scoreIndRNNnoaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Evaluasi IndRNN Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -422,18 +437,18 @@ oleh model sebesar 0.52 pada kelas 1, 0.0 pada kelas 2, 0.0 pada kelas 3.
 
 Berikut merupakan gambar hasil evaluasi model IndRNN  dengan data augmentasi:
 \newpage
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.5]{gambar/CMIndRNNaug.png}
+  \includegraphics[scale=0.7]{gambar/CMIndRNNaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Confusion Matrix IndRNN Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:CMIndRNNaug}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.85]{gambar/scoreIndRNNaug.png}
+  \includegraphics[scale=0.55]{gambar/scoreIndRNNaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Evaluasi IndRNN Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -450,7 +465,7 @@ oleh model sebesar 0.40 pada kelas 1, 0.60 pada kelas 2, 0.80 pada kelas 3.
 
 Berikut merupakan gambar hasil evaluasi model LSTM tanpa data augmentasi:
 \newpage
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=0.7]{gambar/CMLSTMnoAug.png}
   % Keterangan gambar yang diinputkan
@@ -459,9 +474,9 @@ Berikut merupakan gambar hasil evaluasi model LSTM tanpa data augmentasi:
   \label{fig:CMLSTMnoaug}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.85]{gambar/scoreLSTMnoaug.png}
+  \includegraphics[scale=0.55]{gambar/scoreLSTMnoaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Evaluasi LSTM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -474,18 +489,19 @@ nilai recall sebesar 0.38 pada kelas 1, 0.22 pada kelas 2, dan 0.25 pada kelas 3
 oleh model sebesar 0.32 pada kelas 1, 0.29 pada kelas 2, 0.24 pada kelas 3.
 
 Berikut merupakan gambar hasil evaluasi model LSTM dengan data augmentasi:
-\begin{figure} [H] \centering
+\newpage
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.45]{gambar/CMLSTMaug.png}
+  \includegraphics[scale=0.7]{gambar/CMLSTMaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Confusion Matrix LSTM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:CMLSTMaug}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.75]{gambar/scoreLSTMaug.png}
+  \includegraphics[scale=0.55]{gambar/scoreLSTMaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Evaluasi LSTM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -501,18 +517,18 @@ oleh model sebesar 0.33 pada kelas 1, 0.25 pada kelas 2, 0.55 pada kelas 3.
 Berikut merupakan gambar hasil evaluasi model SVM tanpa data augmentasi:
 
 \newpage
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=5]{gambar/CMSVMnoAug.png}
+  \includegraphics[scale=2.5]{gambar/CMSVMnoAug.png}
   % Keterangan gambar yang diinputkan
-  \caption{Akurasi dan Loss SVM Tanpa Data Augmentasi}
+  \caption{Confusion Matrix SVM Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:CMSVMnoaug}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=1]{gambar/scoreSVMnoaug.png}
+  \includegraphics[scale=0.55]{gambar/scoreSVMnoaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Evaluasi SVM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -528,18 +544,19 @@ kelas 3. Nilai f1-score yang dihasilkan oleh model sebesar 0.35 pada kelas 1, 0.
 
 Berikut merupakan gambar hasil evaluasi model SVM dengan data augmentasi:
 
-\begin{figure} [H] \centering
+\newpage
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=5]{gambar/CMSVMaug.png}
+  \includegraphics[scale=2.5]{gambar/CMSVMaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Confusion Matrix SVM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:CMSVMaug}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=1]{gambar/scoreSVMaug.png}
+  \includegraphics[scale=0.55]{gambar/scoreSVMaug.png}
   % Keterangan gambar yang diinputkan
   \caption{Evaluasi SVM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -553,12 +570,16 @@ Model menghasilkan nilai recall sebesar 0.12 pada kelas 1, 0.67 pada kelas 2, da
 kelas 3. Nilai f1-score yang dihasilkan oleh model sebesar 0.20 pada kelas 1, 0.48 pada kelas
 2, 0.40 pada kelas 3.
 
-\section{Hasil Testing Model}
+\section{Hasil Pengujian Model}
+
+Hasil yang didapatkan setelah melakukan pengujian model pada model yang dibuat dengan menggunakan
+arsitektur IndRNN, LSTM, dan SVM dapat dijabarkan sebagai berikut.
+
 \subsection{Independent Recurrent Neural Network}
 
 Berikut merupakan gambar hasil evaluasi model IndRNN tanpa data augmentasi:
 \newpage
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=1.3]{gambar/CMIndRNNnoaug2.png}
   % Keterangan gambar yang diinputkan
@@ -567,9 +588,9 @@ Berikut merupakan gambar hasil evaluasi model IndRNN tanpa data augmentasi:
   \label{fig:CMIndRNNnoaug2}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=1]{gambar/scoreIndRNNnoaug2.png}
+  \includegraphics[scale=0.55]{gambar/scoreIndRNNnoaug2.png}
   % Keterangan gambar yang diinputkan
   \caption{Testing IndRNN Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -584,7 +605,7 @@ oleh model sebesar 0.38 pada kelas 1, 0.0 pada kelas 2, 0.0 pada kelas 3.
 
 Berikut merupakan gambar hasil evaluasi model IndRNN  dengan data augmentasi:
 \newpage
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=1.3]{gambar/CMIndRNNaug2.png}
   % Keterangan gambar yang diinputkan
@@ -593,9 +614,9 @@ Berikut merupakan gambar hasil evaluasi model IndRNN  dengan data augmentasi:
   \label{fig:CMIndRNNaug2}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=1]{gambar/scoreIndRNNaug2.png}
+  \includegraphics[scale=0.55]{gambar/scoreIndRNNaug2.png}
   % Keterangan gambar yang diinputkan
   \caption{Testing IndRNN Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -612,7 +633,7 @@ oleh model sebesar 0.18 pada kelas 1, 0.50 pada kelas 2, 0.67 pada kelas 3.
 
 Berikut merupakan gambar hasil evaluasi model LSTM tanpa data augmentasi:
 \newpage
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=1.3]{gambar/CMLSTMnoAug2.png}
   % Keterangan gambar yang diinputkan
@@ -621,9 +642,9 @@ Berikut merupakan gambar hasil evaluasi model LSTM tanpa data augmentasi:
   \label{fig:CMLSTMnoaug2}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=1]{gambar/scoreLSTMnoaug2.png}
+  \includegraphics[scale=0.55]{gambar/scoreLSTMnoaug2.png}
   % Keterangan gambar yang diinputkan
   \caption{Testing LSTM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -636,7 +657,8 @@ nilai recall sebesar 0.78 pada kelas 1, 0.0 pada kelas 2, dan 0.0 pada kelas 3. 
 oleh model sebesar 0.74 pada kelas 1, 0.0 pada kelas 2, 0.0 pada kelas 3.
 
 Berikut merupakan gambar hasil evaluasi model LSTM dengan data augmentasi:
-\begin{figure} [H] \centering
+\newpage
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=1.3]{gambar/CMLSTMaug2.png}
   % Keterangan gambar yang diinputkan
@@ -645,9 +667,9 @@ Berikut merupakan gambar hasil evaluasi model LSTM dengan data augmentasi:
   \label{fig:CMLSTMaug2}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=1]{gambar/scoreLSTMaug2.png}
+  \includegraphics[scale=0.55]{gambar/scoreLSTMaug2.png}
   % Keterangan gambar yang diinputkan
   \caption{Testing LSTM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -663,18 +685,18 @@ oleh model sebesar 0.67 pada kelas 1, 0.0 pada kelas 2, 0.33 pada kelas 3.
 Berikut merupakan gambar hasil evaluasi model SVM tanpa data augmentasi:
 
 \newpage
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=5]{gambar/CMSVMnoAug2.png}
+  \includegraphics[scale=2.5]{gambar/CMSVMnoAug2.png}
   % Keterangan gambar yang diinputkan
   \caption{Confusion Matrix SVM Tanpa Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:CMSVMnoaug2}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=1]{gambar/scoreSVMnoaug2.png}
+  \includegraphics[scale=0.55]{gambar/scoreSVMnoaug2.png}
   % Keterangan gambar yang diinputkan
   \caption{Testing SVM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -689,19 +711,19 @@ kelas 3. Nilai f1-score yang dihasilkan oleh model sebesar 0.67 pada kelas 1, 0.
 2, 0.20 pada kelas 3.
 
 Berikut merupakan gambar hasil evaluasi model SVM dengan data augmentasi:
-
-\begin{figure} [H] \centering
+\newpage
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=5]{gambar/CMSVMaug2.png}
+  \includegraphics[scale=2.5]{gambar/CMSVMaug2.png}
   % Keterangan gambar yang diinputkan
   \caption{Confusion Matrix SVM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
   \label{fig:CMSVMaug2}
 \end{figure}
 
-\begin{figure} [H] \centering
+\begin{figure} [ht] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=1]{gambar/scoreSVMaug2.png}
+  \includegraphics[scale=0.55]{gambar/scoreSVMaug2.png}
   % Keterangan gambar yang diinputkan
   \caption{Testing SVM Dengan Data Augmentasi}
   % Label referensi dari gambar yang diinputkan
@@ -715,7 +737,6 @@ Model menghasilkan nilai recall sebesar 0.56 pada kelas 1, 0.33 pada kelas 2, da
 kelas 3. Nilai f1-score yang dihasilkan oleh model sebesar 0.71 pada kelas 1, 0.36 pada kelas
 2, 0.0 pada kelas 3.
 
-\newpage
 \section{Pembahasan}
 \label{sec:analisispengujian}
 
@@ -725,7 +746,7 @@ yaitu dengan IndRNN dan LSTM didapatkan tabel sebagai berikut:
 % Contoh pembuatan tabel
 \begin{longtable}{|c|c|c|c|c|}
   \caption{Data Hasil Training Model}
-  \label{tb:EnergiKecepatan}                                                                                            \\
+  \label{tb:EnergiKecepatan1}                                                                                           \\
   \hline
   \rowcolor[HTML]{C0C0C0}
   \textbf{Model}                & \textbf{Akurasi} & \textbf{Validasi} & \textbf{Loss Akurasi} & \textbf{Loss Validasi} \\
@@ -737,6 +758,7 @@ yaitu dengan IndRNN dan LSTM didapatkan tabel sebagai berikut:
   \hline
 \end{longtable}
 
+\newpage
 \begin{longtable}{|c|c|}
   \caption{Data Hasil Evaluasi Model}
   \label{tb:EnergiKecepatan}                                \\
@@ -752,6 +774,8 @@ yaitu dengan IndRNN dan LSTM didapatkan tabel sebagai berikut:
   SVM dengan data augmentasi    & 10 data benar             \\
   \hline
 \end{longtable}
+
+Berikut merupakan analisa pengujian yang didapatkan dari tabel \ref{tb:EnergiKecepatan1} dan tabel \ref{tb:EnergiKecepatan1}.
 
 Model yang pertama yaitu IndRNN dengan input (x) berupa nilai EAR serta MAR dan kelas
 sebagai target (y) mendapatkan hasil training yang kurang baik dengan akurasi sebesar 0.8378 dan validasi akurasi sebesar 0.2,
@@ -773,8 +797,8 @@ Model yang kelima yaitu SVM dengan input (x) berupa nilai EAR serta MAR dan kela
 sebagai target (y) mendapatkan hasil evaluasi yang lebih baik jika dibandingkan dengan IndRNN dan LSTM tanpa data
 augmentasi yang menghasilkan 9 nilai benar.
 
-Model yang keenam yaitu SVM dengan input (x) berupa nilai EAR serta MAR yang teraugmentasi dan kelas sebagai target 
-(y) mendapatkan hasil evaluasi yang lebih baik dari SVM dengan data yang tidak teraugmentasi dengan jumlah 10 nilai benar. 
+Model yang keenam yaitu SVM dengan input (x) berupa nilai EAR serta MAR yang teraugmentasi dan kelas sebagai target
+(y) mendapatkan hasil evaluasi yang lebih baik dari SVM dengan data yang tidak teraugmentasi dengan jumlah 10 nilai benar.
 
 Berdasarkan keseluruhan hasil training dan evaluasi, didapatkan bahwa model klasifikasi terbaik yaitu model IndRNN yang
 ditraining menggunakan data yang telah diaugmentasi. Hal ini memvalidasi bahwa model IndRNN pada klasifikasi kantuk
